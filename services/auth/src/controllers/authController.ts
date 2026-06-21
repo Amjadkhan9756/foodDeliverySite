@@ -1,6 +1,7 @@
 import User from "../modules/User.js";
 import jwt from "jsonwebtoken";
 import TryCatch from "../middleware/tryCatch.js";
+import { AuthenticatedRequest } from "../middleware/isAuth.js";
 
 
 
@@ -27,4 +28,25 @@ export const loginUser = TryCatch(async (req,res) => {
         user,
     })
 
+})
+
+
+const allowedRoles= ["customer","rider","seller"] as const ;
+
+type Role = (typeof allowedRoles)[number]
+
+export const addUserRole = TryCatch(async (req:AuthenticatedRequest,res)=>{
+    if(!req.user?._id){
+        return res.status(401).json({
+            message:"Unauthorized",
+        })
+    }
+
+    const role = req.body as {role:Role}
+
+    if(!allowedRoles.includes(role)){
+        return res.status(400).json({
+            message:"Invalid role"
+        })
+    }
 })
