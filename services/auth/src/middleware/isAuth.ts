@@ -1,21 +1,22 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 
 import jwt, { JwtPayload } from "jsonwebtoken";
 
 import { IUser } from "../modules/User.js";
 
 export interface AuthenticatedRequest extends Request {
-    user: IUser | null;
+    user?: IUser | null;
 }
 
-export const isAuth = async (
-    req: AuthenticatedRequest,
-    res: Response,
+export const isAuth: RequestHandler = async (
+    req,
+    res,
     next: NextFunction
 
 ): Promise<void> => {
+    const authReq = req as AuthenticatedRequest;
     try {
-        const authHeader = req.header("authorization");
+        const authHeader = authReq.header("authorization");
         if (!authHeader || !authHeader.startsWith("Bearer ")) {
             res.status(401).json({
                 message: "Please login --No auth header"
@@ -43,7 +44,7 @@ export const isAuth = async (
             return;
         }
 
-        req.user = decodedValue.user;
+        authReq.user = decodedValue.user;
         next();
 
 

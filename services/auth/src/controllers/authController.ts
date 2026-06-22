@@ -42,12 +42,12 @@ export const addUserRole = TryCatch(async (req:AuthenticatedRequest,res)=>{
         })
     }
 
-    const role = req.body as {role:Role}
+    const { role } = req.body as { role: Role };
 
-    if(!allowedRoles.includes(role)){
+    if (!allowedRoles.includes(role)) {
         return res.status(400).json({
-            message:"Invalid role"
-        })
+            message: "Invalid role"
+        });
     }
 
     const user =await User.findByIdAndUpdate(req.user._id, { role }, { new: true })
@@ -60,4 +60,4 @@ export const addUserRole = TryCatch(async (req:AuthenticatedRequest,res)=>{
         expiresIn: "15d"
     })
     res.json({ user,token})
-})
+});

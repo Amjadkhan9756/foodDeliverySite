@@ -1,20 +1,20 @@
 import mongoose, { Schema } from "mongoose";
 const schema = new Schema({
     name: {
-        type: "String",
-        require: "true"
+        type: String,
+        required: true
     },
     email: {
-        type: "String",
-        require: "true"
+        type: String,
+        required: true
     },
     image: {
-        type: "String",
-        require: "true"
+        type: String,
+        required: true
     },
     role: {
-        type: "String",
-        require: "true"
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
