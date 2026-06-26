@@ -9,7 +9,7 @@ import axios from "axios";
 
 
 
-export const loginUser = TryCatch(async (req, res) => {
+export const loginUser = TryCatch(async(req, res:) => {
 
     const { code } = req.body;
     if (!code) {
@@ -19,7 +19,7 @@ export const loginUser = TryCatch(async (req, res) => {
     const googleRes = await oauth2client.getToken(code)
     oauth2client.setCredentials(googleRes.tokens);
 
-    const userRes = await axios.get('https://www.googleapis.com/oauth2/v2/userinfo?alt=json&acces_token=${googleRes.tokens.access_token}');
+    const userRes = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&acces_token=${googleRes.tokens.access_token}');
 
     const { email, name, picture } = userRes.data;
 

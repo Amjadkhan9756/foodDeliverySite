@@ -3,11 +3,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import connectDB from "./config/db.js";
 import authRouter from "./router/auth.js";
+import cors from "cors";
 dotenv.config()
-    
-await connectDB();
-
 const app = express()
+
+await connectDB();
+app.use(cors());
 app.use(express.json())
 app.use('/api/auth', authRouter);
 
@@ -15,7 +16,7 @@ app.use('/api/auth', authRouter);
 
 
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send({ message: "Welcome to the Auth API" })
 })
 
@@ -24,7 +25,7 @@ app.get("/",(req,res)=>{
 
 
 
-const PORT =  3000;
-app.listen(PORT,()=>{
+const PORT = 3000;
+app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`)
 })
