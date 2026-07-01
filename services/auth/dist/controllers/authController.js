@@ -1,8 +1,8 @@
 import User from "../modules/User.js";
 import jwt from "jsonwebtoken";
 import TryCatch from "../middleware/tryCatch.js";
-import { oauth2client } from "../config/googleConfig.js";
 import axios from "axios";
+import { oauth2client } from "../config/googleConfig.js";
 export const loginUser = TryCatch(async (req, res) => {
     const { code } = req.body;
     if (!code) {
