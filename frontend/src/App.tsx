@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import { Toaster } from "react-hot-toast";
+import ProtectedRoute from "./component/protectedRoute";
+import PublicRoute from "./component/publicRoute";
+import SelectRole from "./pages/SelectRole";
 
 function App() {
   return (
@@ -9,8 +12,13 @@ function App() {
       <Toaster position="top-right" />
 
       <Routes>
+        <Route element={<PublicRoute />}></Route>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/select-role" element={<SelectRole />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
