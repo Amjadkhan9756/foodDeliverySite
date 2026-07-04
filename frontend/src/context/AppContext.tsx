@@ -1,9 +1,10 @@
 import { createContext, use, useState, type ReactNode } from "react"
 import { useEffect } from "react";
 import axios from "axios";
+import type { AppContextType, User } from "../types";
 
 
-const AppContext  =  createContext(undefined)
+const AppContext  =  createContext<AppContextType | undefined>(undefined)
 
 
 interface AppProviderProps {
@@ -12,11 +13,11 @@ interface AppProviderProps {
 
 
 export const AppProvider = ({children}:AppProviderProps) => {
-    const [user,setUser] = useState(null);
+    const [user,setUser] = useState<User | null >(null);
     const [isAuth,setIsAuth] = useState(false);
     const [loading,setLoading] = useState(true);
 
-    const [location ,serLocation] = useState(null);
+    const [location ,setLocation] = useState(null);
     const [loadingLocation ,setLoadingLocation ] = useState(false);
 
     const [city,setCity] = useState("fecting Location...");
@@ -44,5 +45,13 @@ export const AppProvider = ({children}:AppProviderProps) => {
     useEffect(()=>{
         fetchUser();
     },[])
+
+    return (
+        <>
+        <AppContext.Provider 
+        value = {{user,loading,isAuth,setUser,setLoading,setIsAuth}}
+        />
+        </>
+    )
 }
     
