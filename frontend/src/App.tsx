@@ -12,11 +12,12 @@ function App() {
       <Toaster position="top-right" />
 
       <Routes>
-        <Route element={<PublicRoute />}></Route>
-        <Route path="/" element={<Home />} />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+        </Route>
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route path="/select-role" element={<SelectRole />} />
         </Route>
       </Routes>
