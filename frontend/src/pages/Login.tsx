@@ -50,8 +50,8 @@ function Login() {
                 <div className="w-full max-w-sm space-y-6 ">
                     <h1 className="text-center text-3xl font-bold text-[#E23774]">foodDeliverySite</h1>
 
-                    <p className="text-center text-sm text-gray-500">Login or signup to continue</p>
-                    <button onClick={googleLogin} disabled={loading} className="flex w-full items-center justify-center gap-3 rounded-xl border border-gey-300 bg-white px-4 py-3 ">
+                    <p className="text-center text-sm text-grey-500">Login or signup to continue</p>
+                    <button onClick={googleLogin} disabled={loading} className="flex w-full items-center justify-center gap-3 rounded-xl border border-grey-300 bg-white px-4 py-3 ">
                         <FcGoogle size={20} />{loading ? "Signing in..." : "Continue with Google"}
                     </button>
                 </div>

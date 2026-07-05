@@ -1,7 +1,8 @@
-import { createContext, use, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react"
 import { useEffect } from "react";
 import axios from "axios";
 import type { AppContextType, User } from "../types";
+import { authService } from "../main";
 
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -20,15 +21,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     const [location, setLocation] = useState(null);
     const [loadingLocation, setLoadingLocation] = useState(false);
 
-    const [city, setCity] = useState("fecting Location...");
+    const [city, setCity] = useState("Detecting Location...");
+
     async function fetchUser() {
         try {
             const token = localStorage.getItem("token");
-            const { data } = await axios.get(`$(authService)/api/auth/me`, {
+            const { data } = await axios.get(`${authService}/api/auth/me`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
-
             });
             setUser(data.user);
             setIsAuth(true);
@@ -47,12 +48,23 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     }, [])
 
     return (
-        <>
-            <AppContext.Provider
-                value={{ user, loading, isAuth, setUser, setLoading, setIsAuth }}>
-                {children}
-            </AppContext.Provider>
-        </>
+        <AppContext.Provider
+            value={{
+                user,
+                loading,
+                isAuth,
+                setUser,
+                setLoading,
+                setIsAuth,
+                location,
+                setLocation,
+                loadingLocation,
+                setLoadingLocation,
+                city,
+                setCity,
+            }}>
+            {children}
+        </AppContext.Provider>
     )
 };
 
