@@ -1,28 +1,34 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import { Toaster } from "react-hot-toast";
-import ProtectedRoute from "./component/protectedRoute";
-import PublicRoute from "./component/publicRoute";
-import SelectRole from "./pages/SelectRole";
 
-function App() {
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from "./pages/Home.tsx"
+import LoginPage from './pages/Login.tsx';
+import ProtectedRoute from "./component/protectedRoute.tsx";
+import PublicRoute from "./component/publicRoute.tsx";
+import SelectRole from './pages/SelectRole.tsx';
+
+
+
+export default function App() {
   return (
-    <BrowserRouter>
-      <Toaster position="top-right" />
+    <div className="font-sans">
+      <BrowserRouter>
+        <Routes>
+          
+          <Route element={<ProtectedRoute />} >
+            <Route path='/' element={<Home/>} />
+          </Route>
 
-      <Routes>
-        <Route element={<PublicRoute />}>
-          <Route path="/login" element={<Login />} />
-        </Route>
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/select-role" element={<SelectRole />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+          <Route element={<PublicRoute />}>
+            <Route path='/login' element={<LoginPage />} />
+            <Route element={<SelectRole />} path="/select-role" />
+          </Route>
+
+
+
+        </Routes>
+
+      </BrowserRouter>
+    </div>
   );
 }
-
-export default App;
