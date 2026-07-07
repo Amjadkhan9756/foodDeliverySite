@@ -1,24 +1,21 @@
-import { createContext, useContext, useState, type ReactNode } from "react"
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { useEffect } from "react";
 import axios from "axios";
-import type { AppContextType, User } from "../types";
+import type { AppContextType, LocationData, User } from "../types";
 import { authService } from "../main";
 
-
-const AppContext = createContext<AppContextType | undefined>(undefined)
-
+const AppContext = createContext<AppContextType | undefined>(undefined);
 
 interface AppProviderProps {
     children: ReactNode;
 }
-
 
 export const AppProvider = ({ children }: AppProviderProps) => {
     const [user, setUser] = useState<User | null>(null);
     const [isAuth, setIsAuth] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    const [location, setLocation] = useState(null);
+    const [location, setLocation] = useState<LocationData | null>(null);
     const [loadingLocation, setLoadingLocation] = useState(false);
 
     const [city, setCity] = useState("Detecting Location...");
@@ -33,19 +30,16 @@ export const AppProvider = ({ children }: AppProviderProps) => {
             });
             setUser(data.user);
             setIsAuth(true);
-
         } catch (error) {
             console.log(error);
-
         } finally {
             setLoading(false);
         }
     }
 
-
     useEffect(() => {
         fetchUser();
-    }, [])
+    }, []);
 
     return (
         <AppContext.Provider
@@ -62,12 +56,13 @@ export const AppProvider = ({ children }: AppProviderProps) => {
                 setLoadingLocation,
                 city,
                 setCity,
-            }}>
+                fetchUser,
+            }}
+        >
             {children}
         </AppContext.Provider>
-    )
+    );
 };
-
 
 export const useAppData = (): AppContextType => {
     const context = useContext(AppContext);

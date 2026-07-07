@@ -1,11 +1,11 @@
 
 
-function Home(){
-    return (
-        <>
-        <h1>this is the Home page</h1>
-        </>
-    )
+
+
+const Home = () => {
+  return (
+    <div>HomePage</div>
+  )
 }
 
 export default Home;
