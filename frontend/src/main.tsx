@@ -6,8 +6,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppProvider } from './context/AppContext.tsx';
 
 
-export const authService = "http://127.0.0.1:3000";
-
+export const authService = "http://localhost:3000"; // ⚠️ check this
 
 
 
