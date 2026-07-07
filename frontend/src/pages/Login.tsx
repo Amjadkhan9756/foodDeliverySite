@@ -46,7 +46,7 @@ const LoginPage = () => {
   return(
   <div className="flex min-h-screen items-center justify-center bg-white px-4">
     <div className="w-full max-w-sm space-y-6">
-      <h1 className="text-center text-3xl front-bold text-[#E23]">DineFlow</h1>
+      <h1 className="text-center text-3xl front-bold text-[#E23]">FoodDeliverySite</h1>
       <p className="text-center text-sm text-gray-500">
         Log In or Sing up to continue
       </p>
