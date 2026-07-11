@@ -1,13 +1,10 @@
 import { Request, Response, NextFunction, RequestHandler } from "express";
-
 import jwt, { JwtPayload } from "jsonwebtoken";
-
 import { IUser } from "../modules/User.js";
 
 export interface AuthenticatedRequest extends Request {
     user?: IUser | null;
 }
-
 export const isAuth: RequestHandler = async (
     req,
     res,
