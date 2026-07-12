@@ -26,8 +26,13 @@ const Navbar = ()=>{
     }, [search])
     return (
         <>
-        <h1>Navbar</h1>
+        <div>
+            <div>
+                
+            </div>
+        </div>
         </>
+
     )
 }
 
