@@ -5,6 +5,7 @@ import LoginPage from './pages/Login.tsx';
 import ProtectedRoute from "./component/protectedRoute.tsx";
 import PublicRoute from "./component/publicRoute.tsx";
 import SelectRole from './pages/SelectRole.tsx';
+import Navbar from './component/navbar.tsx';
 
 
 
@@ -12,6 +13,7 @@ export default function App() {
   return (
    <div className="font-sans">
      <BrowserRouter>
+     <Navbar/>
        <Routes>
       <Route element ={<SelectRole/>} path="/select-role"/>
      <Route   element={<ProtectedRoute/>} >
