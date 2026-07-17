@@ -41,6 +41,55 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         fetchUser();
     }, []);
 
+  useEffect(() => {
+    if (!navigator.geolocation) {
+        alert("Please allow location access to continue");
+        return;
+    }
+
+    setLoadingLocation(true);
+
+    navigator.geolocation.getCurrentPosition(
+        async (position) => {
+            const { latitude, longitude } = position.coords;
+
+            try {
+                const res = await fetch(
+                    `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+                );
+                const data = await res.json();
+
+                setLocation({
+                    latitude,
+                    longitude,
+                    formattedAddress: data.display_name || "current location",
+                });
+
+                setCity(
+                    data.address?.city ||
+                    data.address?.town ||
+                    data.address?.village ||
+                    "Your location"
+                );
+            } catch (error) {
+                setLocation({
+                    latitude,
+                    longitude,
+                    formattedAddress: "current location",
+                });
+                setCity("failed to load");
+            } finally {
+                setLoadingLocation(false);
+            }
+        },
+        (error) => {
+            console.error("Geolocation error:", error.message);
+            setLoadingLocation(false);
+            setCity("Location permission denied");
+        }
+    );
+}, []);
+
     return (
         <AppContext.Provider
             value={{
