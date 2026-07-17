@@ -36,6 +36,13 @@ function Account() {
             <BiPackage className="h-5 w-5 text-red-500" />
             <span className="font-medium">Your Orders</span>
           </div>
+           <div
+            className="flex cursor-pointer items-center gap-4 p-5 hover:bg-gray-50"
+            onClick={() => navigate("/address")}
+          >
+            <BiPackage className="h-5 w-5 text-red-500" />
+            <span className="font-medium">Your Address</span>
+          </div>
           <div
             className="flex cursor-pointer items-center gap-4 p-5 hover:bg-gray-50"
             onClick={logoutHandler}
