@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="w-full bg-white shadow-sm">
                 <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
                     <Link to="/" className="text-2xl font-bold text-[#E23744] cursor-pointer">
-                        Food Delivery
+                        Food Delivery Site
                     </Link>
 
                     <div className="flex items-center gap-4">
