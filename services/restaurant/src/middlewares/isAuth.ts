@@ -10,9 +10,6 @@ export interface IUser {
     role: string;
 }
 
-
-
-
 export interface AuthenticatedRequest extends Request {
     user?: IUser | null;
 }
@@ -63,3 +60,5 @@ export const isAuth: RequestHandler = async (
 
     }
 }
+
+
