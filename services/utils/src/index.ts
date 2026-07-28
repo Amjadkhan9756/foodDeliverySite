@@ -1,13 +1,20 @@
 import express from "express"
 import dotenv from "dotenv"
 import cloudinary from "cloudinary";
-
+import uploadRoutes from "./routes/cloudinary";
 import cors from "cors";
 
-dotenv.config();
+
+
+
+
 
 const app = express();
 app.use(cors());
+dotenv.config();
+app.use(cors());
+
+
 
 const { CLOUD_NAME, CLOUD_API_KEY, CLOUD_SECRET_KEY } = process.env;
 
@@ -22,6 +29,7 @@ cloudinary.v2.config({
     api_secret: CLOUD_SECRET_KEY
 })
 
+app.use("/api/upload", uploadRoutes);
 
 
 
