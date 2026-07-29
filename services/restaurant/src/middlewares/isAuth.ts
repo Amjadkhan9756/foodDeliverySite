@@ -62,3 +62,21 @@ export const isAuth: RequestHandler = async (
 }
 
 
+export const isSeller: RequestHandler = async (
+    req,
+    res,
+    next: NextFunction
+
+): Promise<void>=>{
+    const user = req.user;
+
+    if(user && user.rol === "seller"){
+        res.status(401).json({
+            Message:"You are not authorized seller "
+        });
+        return;
+
+    }
+    next();
+
+}

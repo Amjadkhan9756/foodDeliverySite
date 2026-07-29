@@ -5,5 +5,8 @@ import AuthanticatedRequest from "../middlewares/auth.js";
 
 
 export const addRestaurant = TryCatch(async (req:AuthanticatedRequest, res) => {
+    const user = req.user;
+    
+
   
-}
+})
