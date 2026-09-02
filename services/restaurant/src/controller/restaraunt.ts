@@ -3,7 +3,7 @@ import Restaurant from "../models/restaurant.js";
 import AuthanticatedRequest from "../middlewares/auth.js";
 import getBuffer from "../config/datauri.js";
 import axios from "axios";
-
+import jwt from "jsonwebtoken";
 
 
 export const addRestaurant = TryCatch(async (req: AuthanticatedRequest, res) => {
@@ -84,22 +84,25 @@ export const addRestaurant = TryCatch(async (req: AuthanticatedRequest, res) => 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 });
+
+
+ export const fetchMyRestaurant = TryCatch(
+    async (req: AuthanticatedRequest, res) => {
+        if(!req.user) {
+            return res.status(401).json({
+                message: "Please login to access this resource"
+            })
+        }
+
+        const restaurant = await Restaurant.findOne({ownerId:req.user._id});
+        if(!restaurant) {
+            return res.status(404).json({
+                message: "Restaurant not found"
+            })
+        }
+
+    }
+
+
+);

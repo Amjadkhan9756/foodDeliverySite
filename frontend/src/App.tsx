@@ -7,10 +7,15 @@ import PublicRoute from "./component/publicRoute.tsx";
 import SelectRole from './pages/SelectRole.tsx';
 import Navbar from './component/navbar.tsx';
 import Account from './pages/Account.tsx';
-
+import { useAppData } from './context/AppContext.tsx';
+import Restaraunt from './pages/Restaraunt.tsx';
 
 
 export default function App() {
+  const {user} = useAppData();
+  if(user && user.role === "seller") {
+    return <Restaraunt />;
+  }
   return (
     <div className="font-sans">
       <BrowserRouter>
