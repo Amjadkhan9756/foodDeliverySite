@@ -102,6 +102,24 @@ export const addRestaurant = TryCatch(async (req: AuthanticatedRequest, res) => 
             })
         }
 
+
+            if(!req.user.restaurantId){
+                const token = jwt.sign({
+                    user:{
+                        ...req.user,
+                        restaurantId: restaurant._id,
+                    }
+                },
+                process.env.JWT_SECRET as string,
+                {
+                    expiresIn: "1d"
+                }
+                )
+            
+            }
+
+            }
+
     }
 
 
