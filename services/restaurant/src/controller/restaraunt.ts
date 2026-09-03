@@ -118,7 +118,7 @@ export const addRestaurant = TryCatch(async (req: AuthanticatedRequest, res) => 
             
             }
 
-            }
+          res.json({restaurant});   
 
     }
 

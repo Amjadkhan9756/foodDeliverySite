@@ -1,9 +1,14 @@
-
-
+import type { IRestaurant } from "../types";
+import { useState } from "react";
 function Restaraunt() {
     return (
         <>
-        <h1>Hello, resturuant!</h1>
+            const [restaurant, setRestaurant] = useState<IRestaurant | null>(null);
+            const [loeading,setLoading] = useStaate(true);
+
+
+
+            <h1>Hello, Restaurant!</h1>
         </>
     )
 }
