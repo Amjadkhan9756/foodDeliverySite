@@ -2,6 +2,7 @@ import axios from "axios";
 import type { IRestaurant } from "../types";
 import { useEffect, useState } from "react";
 import { restaurantService } from "../main";
+import AddRestaurant from "../component/AddRestaurant";
 function Restaraunt() {
     const [restaurant, setRestaurant] = useState<IRestaurant | null>(null);
     const [loading, setLoading] = useState(true);
@@ -35,6 +36,16 @@ function Restaraunt() {
     useEffect(() => {
         fetchRestaurant();
     }, []);
+
+    if(loading) {
+        return <div className="flex min-h-screen justify-center items-center">
+            <p className="text-gray-500">Loading...</p>
+        </div>
+    }
+
+    if(!restaurant) {
+        return <AddRestaurant/>
+    }
     return (
         <>
             <h1>Hello, Restaurant!</h1>
