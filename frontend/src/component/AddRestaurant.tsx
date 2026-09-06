@@ -95,12 +95,21 @@ function AddRestaurant() {
                         <BiMapPin className = "text-2xl text-red-500" />
                         <div className = "text-sm">
                             {loadingLocation ? "Fetching you location..." : location?.formattedAddress || "Location not found"}
+                        </div>
                     </div>
+
+                    <button className = "w-full rounded-lg py-3 text-sm fon-semibold text-white bg-[#23744] "
+                     disabled = {submitting }
+                      onClick = {handleSubmit}>
+                        {submitting ? "Submitting..." : "Add Restaurant"}
+                    </button>
 
 
 
 
                 </div>
+
+
 
             </div>
         </>

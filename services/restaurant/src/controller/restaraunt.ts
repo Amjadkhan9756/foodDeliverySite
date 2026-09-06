@@ -75,6 +75,7 @@ export const addRestaurant = TryCatch(async (req: AuthanticatedRequest, res) => 
             contents: [Number(longitude), Number(latitude)],
             formattedAddress,
         },
+        isVerified: false,
     });
 
     return res.status(201).json({
